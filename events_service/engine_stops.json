@@ -1,13 +1,17 @@
-//stop at gas station
 [
     {
-        "recorded_at":"2014-05-17T07:06:14Z",
-        "latitude":49.67784118652344,
-        "longitude":9.798441886901855,
-        "MDI_OBD_MILEAGE":{"1":1322},
-        "MDI_OBD_FUEL":{"1":262901},
-        "GPS_DIR":65.25,
-        "GPS_SPEED":{"1":11280},
-        "DIO_IGNITION": false
+        "GPS_DIR": 65.25,
+        "GPS_SPEED": {
+            "1": 11280
+        },
+        "longitude": 11.58749,
+        "MDI_OBD_FUEL": {
+            "1": 262901
+        },
+        "recorded_at": "2014-05-17T07:06:14Z",
+        "latitude": 48.09754,
+        "MDI_OBD_MILEAGE": {
+            "1": 1322
+        }
     }
 ]
