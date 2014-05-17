@@ -1,2 +1,2 @@
-cch_backend
+cch_backend configured for AWS
 ===========
