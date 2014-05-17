@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^users/', 'restservice.views.user_list'),
     url(r'^refuels/', 'restservice.views.refuel_list'),
+    url(r'^recommendations/$' , 'restservice.views.recommendations'),
     url(r'^admin/', include(admin.site.urls)),
 )

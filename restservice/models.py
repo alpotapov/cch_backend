@@ -32,3 +32,4 @@ class Recommendation(models.Model):
     zip_code = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     price = models.IntegerField(max_length=10)
+    datetime = models.DateTimeField(auto_now=True)

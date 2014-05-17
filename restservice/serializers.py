@@ -56,17 +56,57 @@ class RefuelEventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = RefuelEvent
-        fields = ('id', 'user', 'longitude', 'latitude', 'gas_station_id', 'liked', 'datetime')
+        fields = ('id', 'user', 'amount', 'longitude', 'latitude', 'gas_station_id', 'liked', 'datetime')
 
     def restore_object(self, attrs, instance=None):
         if instance:
             # Update existing instance
             instance.user = attrs.get('user', instance.user)
+            instance.amount = attrs('amount', instance.amount)
             instance.longitude = attrs.get('longitude', instance.longitude)
             instance.latitude = attrs.get('latitude', instance.latitude)
             instance.gas_station_id = attrs.get('gas_station_id', instance.gas_station_id)
-            #instance.liked = attrs.get('liked', instance.liked)
+            instance.liked = attrs.get('liked', instance.liked)
             instance.datetime = attrs.get('datetime', instance.datetime)
 
         # Create new instance
         return RefuelEvent(**attrs)
+
+
+class RecommendationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Recommendation
+        fields = (
+            'id',
+            'user',
+            'rating',
+            'gas_station_id',
+            'longitude',
+            'latitude',
+            'name',
+            'brand',
+            'address',
+            'zip_code',
+            'city',
+            'price'
+        )
+
+    def restore_object(self, attrs, instance=None):
+        if instance:
+            # Update existing instance
+            instance.user = attrs.get('user', instance.user)
+            instance.rating = attrs.get('rating', instance.rating)
+            instance.gas_station_id = attrs.get('gas_station_id', instance.gas_station_id)
+            instance.longitude = attrs.get('longitude', instance.longitude)
+            instance.latitude = attrs.get('latitude', instance.latitude)
+            instance.name = attrs.get('name', instance.name)
+            instance.brand = attrs.get('brand', instance.brand)
+            instance.address = attrs.get('address', instance.address)
+            instance.zip_code = attrs.get('zip_code', instance.zip_code)
+            instance.city = attrs.get('city', instance.city)
+            instance.price = attrs.get('price', instance.price)
+            instance.datetime = attrs.get('datetime', instance.datetime)
+
+        # Create new instance
+        return Recommendation(**attrs)
