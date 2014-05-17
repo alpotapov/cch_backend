@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restservice',
+    'rest_framework',
+    'south'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,16 +59,8 @@ WSGI_APPLICATION = 'cch_backend.wsgi.application'
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'cch_database',                      # Or path to database file if using sqlite3.
-        'USER': 'cch_user',
-        'PASSWORD': 'cch_user_password',
-        'HOST': 'localhost',
-        'PORT': '',                      # Set to empty string for default.
-    }
-}
+from cch_backend.database_settings import DATABASES
+DATABASES = DATABASES
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
