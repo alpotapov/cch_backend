@@ -7,7 +7,7 @@ gas_map = gas_api.get_current_gas_station_map()
 gas_locations = gas_api.extract_lat_lon_from_map(gas_map)
 
 def get_current_user_details(ccid):
-    return get_vehicle_data_by_ccid(ccid)
+    return car_api.get_vehicle_data_by_ccid(ccid)
 
 def get_all_stations_near_ccid(ccid, km_threshold):
     vehicle_data = get_current_user_details(ccid)
