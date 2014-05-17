@@ -17,5 +17,6 @@ def extract_lat_lon_from_map(gas_station_map):
             gas_station_map[key].get('longitude'),
             key
         )
+
     return sorted(map(extract, gas_station_map))
 
