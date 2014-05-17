@@ -54,13 +54,25 @@ def refuel_list(request):
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data, status=201)
-        else:
-            return Response(serializer.data, content_type='text/plain', status=500)
+
         return JSONResponse(serializer.errors, status=400)
 
     if request.method == 'GET':
         refuels = RefuelEvent.objects.all()
-        serializer = UserSerializer(refuels, many=True)
+        serializer = RefuelEventSerializer(refuels, many=True)
         return JSONResponse(serializer.data)
+
+    return HttpResponse(status=405)
+
+
+@api_view(['GET'])
+def recommendations(request):
+    if request.method == 'GET':
+        # make request to the Recommender
+        return JSONResponse({"ccid": request.GET.get('ccid', 0)})
+        # ccid = request.GET.get('ccid', 0)
+        # recommendations = recommender.get_recommendations_for_ccid(ccid)
+        # serializer = RecommendationSerializer(recommendations, many=True)
+        # return JSONResponse(serializer.data)
 
     return HttpResponse(status=405)
