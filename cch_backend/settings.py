@@ -81,5 +81,5 @@ USE_TZ = True
 
 #STATIC_URL = '/static/'
 #STATIC_ROOT = '/static/'
-STATIC_ROOT =path.join(PROJECT_ROOT,'static')
-STATIC_URL =path.join(PROJECT_ROOT,'static')
+STATIC_ROOT = path.join(PROJECT_ROOT,'static')
+STATIC_URL = path.join(PROJECT_ROOT,'static')
