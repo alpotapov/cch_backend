@@ -9,12 +9,13 @@ gas_locations = gas_api.extract_lat_lon_from_map(gas_map)
 def get_current_user_details(ccid):
     return car_api.get_vehicle_data_by_ccid(ccid)
 
-def get_all_stations_near_ccid(ccid, km_threshold):
-    vehicle_data = get_current_user_details(ccid)
+def get_all_stations_near_ccid(km_threshold, ccid='', lat=0, lon='', angle=''):
+    if ccid != '':
+        vehicle_data = get_current_user_details(ccid)
 
-    lat = vehicle_data['latitude']
-    lon = vehicle_data['longitude']
-    angle = vehicle_data['GPS_DIR']
+        lat = vehicle_data['latitude']
+        lon = vehicle_data['longitude']
+        angle = vehicle_data['GPS_DIR']
 
     get_distance = lambda (gas_lat, gas_lon, gas_id): (
             haversine(lat, lon, gas_lat, gas_lon), 

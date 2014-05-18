@@ -20,7 +20,7 @@ def get_recommendations_for_ccid(ccid):
     fuel_preference = user.fuel_type
         
     recommendations = []
-    stations = apis.get_all_stations_near_ccid(ccid, KM_THRESHOLD)
+    stations = apis.get_all_stations_near_ccid(ccid=ccid, km_threshold=KM_THRESHOLD)
     for station in stations:
         curr_dist = station[0][0]
         curr_angle_delta = station[0][1]
