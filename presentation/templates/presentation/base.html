@@ -13,7 +13,7 @@
     </script>
     <script type="text/javascript">
       function initialize() {
-        $.getJSON('http://localhost:8000/recommendations?ccid=1234567890').done(function(response){
+        $.getJSON('http://smartgas.elasticbeanstalk.com/recommendations?ccid=1234567890').done(function(response){
             lat = response.usercontext.latitude;
             lon = response.usercontext.longitude;
             console.log(response.usercontext.gps_dir);
