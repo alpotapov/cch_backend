@@ -5,7 +5,7 @@ class User(models.Model):
     connected_car_id = models.CharField(max_length=50, unique=True)
     notification_id = models.CharField(max_length=50)
     tank_max_value = models.FloatField(max_length=50, blank=True, null=True)
-    fuel_type = models.IntegerField(null=True)  # diesel=0, e10=1, e5=2
+    fuel_type = models.IntegerField(default=2)  # diesel=0, e10=1, e5=2
     average_fuel_consumption = models.FloatField(max_length=50, default=-1)
     last_fuel_amount = models.FloatField(max_length=50, default=-1)
 
