@@ -1,4 +1,4 @@
-from restservice.models import User, RefuelEvent, Recommendation
+from restservice.models import User, RefuelEvent, Recommendation, UserContext
 from rest_framework import serializers
 
 
@@ -87,3 +87,20 @@ class RecommendationSerializer(serializers.ModelSerializer):
 
         # Create new instance
         return Recommendation(**attrs)
+
+
+class UserContextSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = UserContext
+        fields = (
+            'longitude',
+            'latitude',
+            'gps_dir'
+        )
+
+    # def restore_object(self, attrs, instance=None):
+    #     if instance:
+    #         # Update existing instance
+    #         instance.longitude = attrs.get('longitude', instance.longitude)
+    #         instance.latitude = attrs.get('latitude', instance.latitude)
+    #         instance.gps_dir = attrs.get('gps_dir', instance.gps_dir)

@@ -2,6 +2,8 @@ import service_abstraction as apis
 from models import Recommendation, User
 
 KM_THRESHOLD = 15
+
+
 def get_recommendations_for_ccid(ccid):
     response = {}
     
@@ -16,12 +18,6 @@ def get_recommendations_for_ccid(ccid):
     user = User.objects.get(connected_car_id=ccid)
 
     fuel_preference = user.fuel_type
-    if fuel_preference == 0:
-        curr_price = curr_details['prices']['price_diesel']
-    elif fuel_preference == 1:
-        curr_price = curr_details['prices']['price_superE10']
-    else:
-        curr_price = curr_details['prices']['price_superE5']
         
     recommendations = []
     stations = apis.get_all_stations_near_ccid(ccid, KM_THRESHOLD)
@@ -30,14 +26,25 @@ def get_recommendations_for_ccid(ccid):
         curr_angle_delta = station[0][1]
         curr_key = station[1]
 
-        curr_details = gas_map[curr_key]
-        curr_lon = curr_details['longitude']
-        curr_lat = curr_details['latitude']
+        curr_details = apis.gas_map[curr_key]
+
+        try:
+            if fuel_preference == 0:
+                curr_price = curr_details['prices']['price_diesel']
+            elif fuel_preference == 1:
+                curr_price = curr_details['prices']['price_superE10']
+            else:
+                curr_price = curr_details['prices']['price_superE5']
+        except KeyError:
+            continue
+
+        if curr_price is None:
+            continue
 
         rating = calculate_rating(curr_dist, curr_angle_delta)
 
         curr_recommendation = Recommendation(
-            user=user.id,
+            user=user,
             rating=rating,
             gas_station_id=curr_key,
             longitude=curr_details['longitude'],
@@ -52,7 +59,10 @@ def get_recommendations_for_ccid(ccid):
         curr_recommendation.save()
 
         recommendations.append(curr_recommendation)
-    
+
+    recommendations = sorted(recommendations, key=lambda recommendation: recommendation.rating)
+    recommendations = recommendations[-10:]
+    recommendations.reverse()
     response['recommendations'] = recommendations
     return response
 

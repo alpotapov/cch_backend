@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from models import *
 from serializers import *
+import json
+from restservice import recommender
 
 
 class JSONResponse(HttpResponse):
@@ -69,10 +71,20 @@ def refuel_list(request):
 def recommendations(request):
     if request.method == 'GET':
         # make request to the Recommender
-        return JSONResponse({"ccid": request.GET.get('ccid', 0)})
-        # ccid = request.GET.get('ccid', 0)
-        # recommendations = recommender.get_recommendations_for_ccid(ccid)
-        # serializer = RecommendationSerializer(recommendations, many=True)
-        # return JSONResponse(serializer.data)
+        #return JSONResponse({"ccid": request.GET.get('ccid', 0)})
+        ccid = request.GET.get('ccid', 0)
+        recommendations = recommender.get_recommendations_for_ccid(ccid)
+        serializer_recomendations = RecommendationSerializer(recommendations['recommendations'], many=True)
+        serializer_usercontext = UserContextSerializers(recommendations['usercontext'])
+        response = JSONRenderer().render({
+            "usercontext": JSONRenderer().render(serializer_usercontext.data),
+            "recommendations": JSONRenderer().render(serializer_recomendations.data)
+
+        })
+        return HttpResponse(response, content_type='application/json')
+        # response = \
+        #     JSONRenderer().render(serializer_recomendations.data) \
+        #     + JSONRenderer().render(serializer_usercontext.data)
+        return JSONResponse(response)
 
     return HttpResponse(status=405)
