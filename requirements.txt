@@ -1,5 +1,6 @@
 Django==1.6.5
 South==0.8.4
+django-push-notifications==1.0.1
 djangorestframework==2.3.13
 lockfile==0.9.1
 psycopg2==2.5.3
