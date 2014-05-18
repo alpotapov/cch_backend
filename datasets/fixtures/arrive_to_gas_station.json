@@ -1,0 +1,12 @@
+[
+    {
+        "recorded_at":"2014-05-17T07:06:14Z",
+        "latitude":48.09754,
+        "longitude":11.58749,
+        "MDI_OBD_MILEAGE":{"1":1322},
+        "MDI_OBD_FUEL":{"1":262901},
+        "GPS_DIR":65.25,
+        "GPS_SPEED":{"1":11280},
+        "IGNITION": false
+    }
+]

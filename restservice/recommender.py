@@ -20,7 +20,7 @@ def get_recommendations_for_ccid(ccid):
     fuel_preference = user.fuel_type
         
     recommendations = []
-    stations = apis.get_all_stations_near_ccid(ccid, KM_THRESHOLD)
+    stations = apis.get_all_stations_near_ccid(ccid=ccid, km_threshold=KM_THRESHOLD)
     for station in stations:
         curr_dist = station[0][0]
         curr_angle_delta = station[0][1]
@@ -69,9 +69,9 @@ def get_recommendations_for_ccid(ccid):
 def calculate_rating(distance, angle_delta):
     score = 0
     distance += 0.001 # avoid division by 0
-    score += (1/distance)*5
+    score += (1/distance)*2
 
     # reduce score for a bigger delta
-    score *= pow((180-angle_delta)/angle_delta,2)
+    score *= pow((180-angle_delta)/180,3)
 
     return score
