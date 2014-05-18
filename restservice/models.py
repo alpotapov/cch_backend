@@ -11,7 +11,7 @@ class User(models.Model):
 
 
 class RefuelEvent(models.Model):
-    amount = models.IntegerField(max_length=100)
+    amount = models.FloatField()
     user = models.ForeignKey(User)
     longitude = models.FloatField(blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)

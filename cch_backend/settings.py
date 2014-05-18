@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'restservice',
+    'notification_service',
     'rest_framework',
     'south'
 )
