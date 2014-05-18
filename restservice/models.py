@@ -20,6 +20,12 @@ class RefuelEvent(models.Model):
     datetime = models.DateTimeField(auto_now=True)
 
 
+class UserContext(models.Model):
+    longitude = models.FloatField(blank=True, null=True)
+    latitude = models.FloatField(blank=True, null=True)
+    gps_dir = models.FloatField(blank=True, null=True)
+
+
 class Recommendation(models.Model):
     user = models.ForeignKey(User)
     rating = models.FloatField()
