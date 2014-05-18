@@ -69,9 +69,9 @@ def get_recommendations_for_ccid(ccid):
 def calculate_rating(distance, angle_delta):
     score = 0
     distance += 0.001 # avoid division by 0
-    score += (1/distance)*5
+    score += (1/distance)*2
 
     # reduce score for a bigger delta
-    score *= pow((180-angle_delta)/angle_delta,2)
+    score *= pow((180-angle_delta)/180,3)
 
     return score

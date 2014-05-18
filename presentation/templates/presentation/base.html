@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map-canvas { height: 100% }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDECe4Zl5L9GfH9vy1ipiOd2Wqy5NktQQ&sensor=false">
+    </script>
+    <script type="text/javascript">
+      function initialize() {
+        $.getJSON('http://localhost:8000/recommendations?ccid=1234567890').done(function(response){
+            lat = response.usercontext.latitude;
+            lon = response.usercontext.longitude;
+            console.log(response.usercontext.gps_dir);
+
+            var mapOptions = {
+              center: new google.maps.LatLng(lat, lon),
+              zoom: 13
+            };
+
+            var canvas = document.getElementById("map-canvas")
+            var map = new google.maps.Map(canvas, mapOptions);
+
+            var carimage = 'http://files.softicons.com/download/toolbar-icons/fatcow-hosting-icons-by-fatcow/png/32/small_car.png';
+            // var markerimage = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+            var markerimage = 'http://maps.google.com/mapfiles/ms/icons/green-dot.png';
+            // var markericon = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+
+
+
+            var carmarker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lon),
+                map: map,
+                icon: carimage
+            });
+
+            for(var i = 0; i < response.recommendations.length; i++) {
+                cr = response.recommendations[i];
+
+                if (i > 2) {
+                    markerimage = 'http://maps.google.com/mapfiles/ms/icons/red-dot.png';
+                }
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(cr.latitude, cr.longitude),
+                    map: map,
+                    title: cr.rating.toString(),
+                    animation: google.maps.Animation.DROP,
+                    icon: markerimage
+                });
+            }
+          }
+        );
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"/>
+  </body>
+</html>

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'restservice',
     'notification_service',
     'rest_framework',
+    'presentation',
     'south'
 )
 
