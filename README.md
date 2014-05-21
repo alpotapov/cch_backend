@@ -1,2 +1,1 @@
-cch_backend configured for AWS
-===========
+Backend for SmartGas. Configured to run on AWS.
